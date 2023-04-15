@@ -1,0 +1,32 @@
+{
+    "status": "ok",
+    "totalResults": 2,
+    "articles": [
+        {
+            "source": {
+                "id": null,
+                "name": "Hindustan Times"
+            },
+            "author": "HT Sports Desk",
+            "title": "Prasad digs Chopra's 11-year-old post, dishes out 6-tweet thread on Rahul debate - Hindustan Times",
+            "description": "As unbelievable as it may sound, the KL Rahul form saga involving former India cricketers Aakash Chopra and Venkatesh Prasad has reached a rather unpleasant stage. | Cricket",
+            "url": "https://www.hindustantimes.com/cricket/venkatesh-prasad-digs-aakash-chopra-s-11-year-old-post-dishes-out-vicious-6-tweet-thread-as-kl-rahul-debate-intensifies-101676987043424.html",
+            "urlToImage": "https://www.hindustantimes.com/ht-img/img/2023/02/21/1600x900/prasad-rahul-chopra-ani-getty_1676987724492_1676987728609_1676987728609.jpg",
+            "publishedAt": "2023-02-21T13:58:34Z",
+            "content": "As unbelievable as it may sound, the KL Rahul saga involving former India cricketers Aakash Chopra and Venkatesh Prasad has reached a rather unpleasant stage. After Chopra questioned Prasad's motive … [+4170 chars]"
+        },
+        {
+            "source": {
+                "id": "the-times-of-india",
+                "name": "The Times of India"
+            },
+            "author": "TIMESOFINDIA.COM",
+            "title": "Injured David Warner ruled out of Border Gavaskar Trophy as Australia problems grow - Indiatimes.com",
+            "description": "Cricket News: Australia opener David Warner will return home from India and miss the last two Tests of the Border Gavaskar Trophy after an elbow fracture and concus",
+            "url": "https://timesofindia.indiatimes.com/sports/cricket/australia-in-india/injured-david-warner-ruled-out-of-border-gavaskar-trophy-as-australia-problems-grow/articleshow/98116667.cms",
+            "urlToImage": "https://static.toiimg.com/thumb/msid-98116619,width-1070,height-580,imgsize-35678,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg",
+            "publishedAt": "2023-02-21T07:47:00Z",
+            "content": "Another blow for the Aussies with David Warner heading home.@ARamseyCricket | #INDvAUS — cricket.com.au (@cricketcomau) 1676957788000"
+        }
+    ]
+}
