@@ -1,90 +1,75 @@
-import React, { Component } from 'react'
-import NewsItem from './NewsItem'
-import Loading from './Loading';
+import React, { useState, useEffect } from "react";
+import NewsItem from "./NewsItem";
+import Loading from "./Loading";
 
-export default class News extends Component {
-    articles = []
-    constructor() {
-        super();
-        this.state = {
-            articles: this.articles,
-            loading: false,
-            page: 1,
-            pageSize: 20        // page: this.page
-        }
+export default function News() {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pageSize] = useState(20); // pageSize is constant
+
+  useEffect(() => {
+    async function fetchNews() {
+      setLoading(true);
+      const url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=fcddded3fc954d08a4f4b585a7278780&page=${page}&pageSize=${pageSize}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setArticles(data.articles);
+      setLoading(false);
     }
 
-    async componentDidMount() {
+    fetchNews();
+  }, [page, pageSize]);
 
-        let url = "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=fcddded3fc954d08a4f4b585a7278780&page=1&pageSize=20"
-
-        let data = await fetch(url)
-        let parsedData = await data.json()
-        this.setState({
-            articles: parsedData.articles,
-            totalResults: parsedData.totalResults
-        })
+  const handlePrev = () => {
+    if (page > 1) {
+      setPage(page - 1);
     }
-    handlePrev = async () => {
-        let url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=fcddded3fc954d08a4f4b585a7278780&page${this.state.page - 1}&pageSize=20`
-        this.setState({
-            loading: true
-        })
-        let data = await fetch(url)
-        let parsedData = await data.json()
-        this.setState({ articles: parsedData.articles })
+  };
 
-
-        this.setState({
-            page: this.state.page - 1,
-            loading: false
-        })
+  const handleNext = () => {
+    if (page * pageSize < articles.totalResults) {
+      setPage(page + 1);
     }
-    handleNext = async () => {
+  };
 
-        let url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=fcddded3fc954d08a4f4b585a7278780&page=${this.state.page + 1}&pageSize=20`;
-        this.setState({
-            loading: true
-        })
-        let data = await fetch(url)
-        let parsedData = await data.json()
-        console.log(this.state.totalResults)
-        // if (Math.ceil(this.state.totalResults / this.state.pageSize) > 1) {
-
-        this.setState({
-            articles: parsedData.articles,
-            page: this.state.page + 1,
-            loading: false
-        })
-        // }
-
-
-    }
-    render() {
-
-        return (
-
-
-            < div >
-
-                <div div className="container my-4" >
-                    <h2>NewsBar-Top headlines!</h2>
-                    {this.state.loading && [<Loading />]}
-                    <div className="row">
-
-                        {
-                            this.state.articles.map((element) => {
-                                // console.log(element)
-                                return < NewsItem title={element.title} description={element.description} imgUrl={element.urlToImage} newsUrl={element.url} />
-                            })
-                        }
-                    </div>
-                    <div className="d-flex justify-content-between">
-                        <button className="btn btn-dark" disabled={this.state.page <= 1} onClick={this.handlePrev}>Previous</button>
-                        <button className="btn btn-dark" disabled={Math.ceil(this.state.page + 1 >= this.state.totalResults / this.state.pageSize)} onClick={this.handleNext}>Next</button>
-                    </div>
-                </div>
-            </div >
-        )
-    }
+  return (
+    <div>
+      <div className="container my-4">
+        <h2>NewsBar-Top headlines!</h2>
+        {loading && <Loading />}
+        <div className="row">
+          {articles.map((element) => (
+            <NewsItem
+              key={element.title}
+              title={element.title}
+              description={element.description}
+              imgUrl={
+                element.urlToImage
+                  ? element.urlToImage
+                  : "https://imgs.search.brave.com/UA-pyyM6Wp945k41Uv6YAUpAWJY7SVpL_1zpT278B_g/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM1/MTcwNTg2NC9waG90/by90aGUtd29yZHMt/YnJlYWtpbmctbmV3/cy1vbi1hbi1hYnN0/cmFjdC1iYWNrZ3Jv/dW5kLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ydDVWb3Rx/LUlyM2pzVG5fb2JJ/SDdUREs1N0g5MmJ3/UzN6dWlNQnI1ZHNZ/PQ"
+              }
+              newsUrl={element.url}
+            />
+          ))}
+        </div>
+        <div className="d-flex justify-content-between">
+          <button
+            className="btn btn-dark"
+            disabled={page <= 1}
+            onClick={handlePrev}
+          >
+            Previous
+          </button>
+          <button
+            className="btn btn-dark"
+            disabled={page * pageSize >= articles.totalResults}
+            onClick={handleNext}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
