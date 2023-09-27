@@ -7,7 +7,7 @@ export default function News() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
-  let pageSize = 5; // pageSize is constant
+  const pageSize = 5; // pageSize is constant
 
   useEffect(() => {
     async function fetchNews() {
