@@ -12,10 +12,13 @@ export default function News() {
   useEffect(() => {
     async function fetchNews() {
       setLoading(true);
-      const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fcddded3fc954d08a4f4b585a7278780&page=${page}&pageSize=${pageSize}`;
+      //   const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fcddded3fc954d08a4f4b585a7278780&page=${page}&pageSize=${pageSize}`;
+      const url =
+        "https://gnews.io/api/v4/search?q=example&apikey=30d04d037707cfd0ee7cf98934fa9e02&country=in&max=10";
       const response = await fetch(url);
       const data = await response.json();
       setTotalResults(data.totalResults);
+      console.log(data.articles);
       setArticles(data.articles);
       setLoading(false);
     }
@@ -47,8 +50,8 @@ export default function News() {
               title={element.title}
               description={element.description}
               imgUrl={
-                element.urlToImage
-                  ? element.urlToImage
+                element.image
+                  ? element.image
                   : "https://imgs.search.brave.com/UA-pyyM6Wp945k41Uv6YAUpAWJY7SVpL_1zpT278B_g/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM1/MTcwNTg2NC9waG90/by90aGUtd29yZHMt/YnJlYWtpbmctbmV3/cy1vbi1hbi1hYnN0/cmFjdC1iYWNrZ3Jv/dW5kLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ydDVWb3Rx/LUlyM2pzVG5fb2JJ/SDdUREs1N0g5MmJ3/UzN6dWlNQnI1ZHNZ/PQ"
               }
               newsUrl={element.url}
