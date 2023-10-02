@@ -1,42 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NewsItem from "./NewsItem";
 import Loading from "./Loading";
 
-export default function News() {
+export default function News(props) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalResults, setTotalResults] = useState(0);
-  const pageSize = 5; // pageSize is constant
-
+  // const [url, setUrl] = useState(props.url);
+  //   const [page, setPage] = useState(1);
+  //   const [totalResults, setTotalResults] = useState(0);
+  //   const pageSize = 5; // pageSize is constant
+  // const url = useContext(UrlContext);
   useEffect(() => {
     async function fetchNews() {
       setLoading(true);
-      //   const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fcddded3fc954d08a4f4b585a7278780&page=${page}&pageSize=${pageSize}`;
-      const url =
-        "https://gnews.io/api/v4/search?q=example&apikey=30d04d037707cfd0ee7cf98934fa9e02&country=in&max=10";
+      // const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fcddded3fc954d08a4f4b585a7278780&page=${page}&pageSize=${pageSize}`;
+      // const url =
+      //   "https://gnews.io/api/v4/search?q=example&apikey=30d04d037707cfd0ee7cf98934fa9e02&country=in&max=10";
+      // setUrl(props.url);
+      setArticles([]);
+      let url = props.url;
       const response = await fetch(url);
       const data = await response.json();
-      setTotalResults(data.totalResults);
-      console.log(data.articles);
+      //   setTotalResults(data.totalResults);
+      //   console.log(data.articles);
       setArticles(data.articles);
       setLoading(false);
     }
 
     fetchNews();
-  }, [page]);
+  }, [props.url]);
 
-  const handlePrev = () => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  };
+  //   const handlePrev = () => {
+  //     if (page > 1) {
+  //       setPage(page - 1);
+  //     }
+  //   };
 
-  const handleNext = async () => {
-    if (page * pageSize < totalResults) {
-      setPage(page + 1);
-    }
-  };
+  //   const handleNext = async () => {
+  //     if (page * pageSize < totalResults) {
+  //       setPage(page + 1);
+  //     }
+  //   };
 
   return (
     <div>
@@ -49,9 +53,9 @@ export default function News() {
               key={element.title}
               title={element.title}
               description={element.description}
-              imgUrl={
-                element.image
-                  ? element.image
+              urlToImage={
+                element.urlToImage
+                  ? element.urlToImage
                   : "https://imgs.search.brave.com/UA-pyyM6Wp945k41Uv6YAUpAWJY7SVpL_1zpT278B_g/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM1/MTcwNTg2NC9waG90/by90aGUtd29yZHMt/YnJlYWtpbmctbmV3/cy1vbi1hbi1hYnN0/cmFjdC1iYWNrZ3Jv/dW5kLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ydDVWb3Rx/LUlyM2pzVG5fb2JJ/SDdUREs1N0g5MmJ3/UzN6dWlNQnI1ZHNZ/PQ"
               }
               newsUrl={element.url}
@@ -59,7 +63,7 @@ export default function News() {
             />
           ))}
         </div>
-        <div className="d-flex justify-content-between">
+        {/* <div className="d-flex justify-content-between">
           <button
             className="btn btn-dark"
             disabled={page <= 1}
@@ -74,7 +78,7 @@ export default function News() {
           >
             Next
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

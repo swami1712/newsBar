@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  // const changedUrl = useContext(UrlContext);
+  // console.log(changedUrl);
+  let url;
+  const handleClick = (query) => {
+    url = `https://newsapi.org/v2/everything?q=${query}&apiKey=fcddded3fc954d08a4f4b585a7278780`;
+    props.changeUrl(url);
+    console.log(url);
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -21,59 +30,95 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+              <li>
                 <a className="nav-link" aria-current="page" href="/">
                   Home
                 </a>
               </li>
 
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
-                  business
-                </a>
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  to="/"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Category
+                </Link>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      aria-current="page"
+                      to="/"
+                      onClick={() => handleClick("business")}
+                    >
+                      business
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      aria-current="page"
+                      to="/"
+                      onClick={() => handleClick("entertainment")}
+                    >
+                      entertainment
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      aria-current="page"
+                      to="/"
+                      onClick={() => handleClick("general")}
+                    >
+                      general
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      aria-current="page"
+                      to="/"
+                      onClick={() => handleClick("health")}
+                    >
+                      health
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      aria-current="page"
+                      to="/"
+                      onClick={() => handleClick("science")}
+                    >
+                      science
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      aria-current="page"
+                      to="/"
+                      onClick={() => handleClick("sports")}
+                    >
+                      sports
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      aria-current="page"
+                      to="/"
+                      onClick={() => handleClick("technology")}
+                    >
+                      technology
+                    </Link>
+                  </li>
+                </ul>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
-                  entertainment
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
-                  general
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
-                  health
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
-                  science
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
-                  sports
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
-                  technology
-                </a>
-              </li>
-
-              {/* <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dropdown
-                                    </a>
-                                    <ul className="dropdown-menu">
-                                        <li><a className="dropdown-item" href="/">Action</a></li>
-                                        <li><a className="dropdown-item" href="/">Another action</a></li>
-                                        <li><hr className="dropdown-divider" /></li>
-                                        <li><a className="dropdown-item" href="/">Something else here</a></li>
-                                    </ul>
-                                </li> */}
             </ul>
             {/* <form className="d-flex" role="search">
                                 <input className="form-control me-2 bg-dark text-light" type="search" placeholder="Search" aria-label="Search" />
