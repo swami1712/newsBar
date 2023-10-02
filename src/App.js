@@ -1,8 +1,8 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState, useContext, createContext } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
   const [url, setUrl] = useState(
